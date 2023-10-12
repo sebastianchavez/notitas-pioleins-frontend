@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "notitas-pioleins-frontend",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

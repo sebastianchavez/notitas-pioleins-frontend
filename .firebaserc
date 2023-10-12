@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "notitaspioleins": {
+      "hosting": {
+        "notitas-pioleins-frontend": [
+          "notitaspioleins"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "notitaspioleins"
+  }
+}
