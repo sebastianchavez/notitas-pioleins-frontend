@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore'
-import { firstValueFrom, map } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, map } from 'rxjs';
 import { IUser } from 'src/app/model/interfaces/user.interface';
 
 @Injectable({
@@ -11,6 +11,8 @@ import { IUser } from 'src/app/model/interfaces/user.interface';
 export class UserService {
 
   private userCollection: AngularFirestoreCollection<IUser>
+  private userSubject: BehaviorSubject<any> = new BehaviorSubject(null)
+  user = this.userSubject.asObservable()
 
   constructor(
     private angularFirestore: AngularFirestore,
@@ -55,7 +57,25 @@ export class UserService {
   }
 
   getStatus(){
+    return firstValueFrom(this.angularFireAuth.authState)
+  }
 
+  async getUserData(){
+    try {
+      const userStatus = await this.getStatus()
+      this.angularFirestore.collection<IUser>('users', (ref => ref.where('email', '==', userStatus?.email).limit(1)))
+      const users = await firstValueFrom(this.userCollection.snapshotChanges().pipe(
+        map(actions => actions.map(a => a.payload.doc.data() as IUser))
+      ))
+      if(users.length > 0){
+        this.userSubject.next(users[0])
+        return users[0]
+      } else {
+        return null
+      }
+    } catch (error) {
+      throw error
+    }
   }
 
   logOut(){

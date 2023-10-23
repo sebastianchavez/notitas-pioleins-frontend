@@ -1,0 +1,9 @@
+mat-card-content{
+    padding-top: 1rem;
+}
+
+.grid-notes{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoggerService } from 'src/app/services/logger/logger.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -8,16 +10,21 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class LoginComponent {
 
+  idLog: string = 'LoginComponent'
+
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
+    private logger: LoggerService,
   ){}
 
   async login(){
     try {
       const response = await this.userService.login()
-      console.log({response});
+      this.router.navigateByUrl('/')
+      this.logger.log(this.idLog, this.login.name, {info: 'Success', response})
     } catch (error) {
-      console.log({error});
+      this.logger.error(this.idLog, this.login.name, {info: 'Error', error})
     }
   }
 }
