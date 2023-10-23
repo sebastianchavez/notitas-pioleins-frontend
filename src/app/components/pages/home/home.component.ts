@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
       .subscribe(res => {
         if(res){
           this.user = res
+          this.getNotes()
         }
       })
   }
@@ -73,5 +74,13 @@ export class HomeComponent implements OnInit {
       type: TypesNote.TASKLIST,
       updatedAt: Date.now()
     }
+  }
+
+  getNotes(){
+    this.noteService.getNotes(this.user?.idUser!)
+      .subscribe(res => {
+        this.notes = res
+        this.logger.log(this.idLog, this.getNotes.name, {info: 'Success', response: res})
+      })
   }
 }
