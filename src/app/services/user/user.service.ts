@@ -35,6 +35,7 @@ export class UserService {
 
       if(users && users.length > 0){
         // TODO: Si usuario existe, retornar promesa resuelta
+        this.userSubject.next(users[0])
         return true
       } else {
         // TODO: Si usuario no existe Registrar usuario
@@ -49,6 +50,7 @@ export class UserService {
           createdAt: Date.now(), // Date
           updatedAt: Date.now()
         }
+        this.userSubject.next(user)
         return this.userCollection.doc(idUser).set(user)
       } 
     } catch (error) {

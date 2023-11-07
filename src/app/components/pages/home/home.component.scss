@@ -7,3 +7,9 @@ mat-card-content{
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
 }
+
+.btn-add {
+    background-color: #8E44AD;
+    color: white !important;
+    padding: 1rem 1.5rem !important;
+}

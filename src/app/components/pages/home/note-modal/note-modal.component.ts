@@ -15,6 +15,8 @@ export class NoteModalComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public note: INote
   ){
+    console.log({note});
+    
   }
 
   addElement(){

@@ -3,7 +3,7 @@
     <div class="container-list">
         <div *ngFor="let c of note.checks; let i = index">
             <mat-checkbox [(ngModel)]="c.value"></mat-checkbox>
-            <label *ngIf="c.state == false" (click)="changeState(c, true, i)">{{c.text}}</label>
+            <label *ngIf="!c.state" (click)="changeState(c, true, i)">{{c.text}}</label>
             <input class="state" [id]="'state_'+i" *ngIf="c.state == true" type="text" (blur)="changeState(c, false, i)"[(ngModel)]="c.text">
         </div>
     </div>

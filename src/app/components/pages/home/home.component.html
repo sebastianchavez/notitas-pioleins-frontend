@@ -1,9 +1,9 @@
 <div class="container-page">
-    <button mat-button (click)="openDialog()">Nueva lista</button>
+    <button class="btn-add" mat-button (click)="openDialog()">Nueva lista</button>
 
     <div class="grid-notes">
         <div *ngFor="let note of notes">
-            <mat-card>
+            <mat-card (click)="openDialog(note)">
                 <mat-card-header>
                     <mat-card-title>{{note.title}}</mat-card-title>
                 </mat-card-header>

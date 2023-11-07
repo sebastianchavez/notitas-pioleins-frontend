@@ -29,7 +29,7 @@ export class NoteService {
   }
 
   getNotes(idUser: string): Observable<INote[]>{
-    this.angularFirestore.collection<INote>('notes', (ref => ref.where('idUser', '==', idUser)))
+    this.noteCollection = this.angularFirestore.collection<INote>('notes', (ref => ref.where('idUser', '==', idUser).orderBy('createdAt', 'desc').startAt(Date.now())))
     return this.noteCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => a.payload.doc.data() as INote))
     )

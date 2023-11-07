@@ -45,8 +45,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialog(){
-    this.clearNote()
+  openDialog(note?: INote){
+    if(!note){
+      this.clearNote()
+    } else {
+      this.note = note
+    }
     const dialogRef = this.dialog.open(NoteModalComponent, {
       width: '30rem',
       data: this.note
