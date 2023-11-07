@@ -7,6 +7,7 @@ import { LoggerService } from 'src/app/services/logger/logger.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { IUser } from 'src/app/model/interfaces/user.interface';
 import { TypesNote } from 'src/app/common/enums/types-note.enum';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
     private noteService: NoteService,
     private logger: LoggerService,
     private userService: UserService,
+    private alertService: AlertService,
   ){
     this.userService.user
       .subscribe(res => {
@@ -86,5 +88,18 @@ export class HomeComponent implements OnInit {
         this.notes = res
         this.logger.log(this.idLog, this.getNotes.name, {info: 'Success', response: res})
       })
+  }
+
+  async deleteNote(note: INote){
+    try {
+      const confirm = await this.alertService.confirm('Desea eliminar esta nota?', 'question')
+      if(confirm.value){
+        await this.noteService.deleteNote(note)
+        this.alertService.toast('Nota eliminada')
+      }
+    } catch (error) {
+      this.alertService.alert('Problemas al eliminar nota, por favor intente más tarde', '', 'error')
+      this.logger.error(this.idLog, this.deleteNote.name, {info: 'Error', error})
+    }
   }
 }

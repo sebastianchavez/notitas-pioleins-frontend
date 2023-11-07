@@ -13,3 +13,16 @@ mat-card-content{
     color: white !important;
     padding: 1rem 1.5rem !important;
 }
+
+.content-card {
+    cursor: pointer;
+}
+
+.header-card {
+    display: flex;
+    justify-content: space-between;
+    cursor: move;
+    mat-icon{
+        cursor: pointer !important;
+    }
+}

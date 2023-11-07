@@ -9,6 +9,7 @@ import { NoteModalComponent } from './note-modal/note-modal.component'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card'
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatCardModule } from '@angular/material/card'
     MatCheckboxModule,
     FormsModule,
     MatCardModule,
+    MatIconModule,
   ]
 })
 export class HomeModule { }

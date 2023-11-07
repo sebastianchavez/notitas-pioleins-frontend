@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QueryFn } from '@angular/fire/compat/firestore';
 import { INote } from 'src/app/model/interfaces/note.interface';
 import { map, Observable } from 'rxjs';
 
@@ -33,5 +33,13 @@ export class NoteService {
     return this.noteCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => a.payload.doc.data() as INote))
     )
+  }
+
+  deleteNote(note: INote) {
+    try {
+      return this.noteCollection.doc(note.idNote).delete()
+    } catch (error) {
+      throw error
+    }
   }
 }
