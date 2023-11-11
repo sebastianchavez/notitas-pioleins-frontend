@@ -1,3 +1,4 @@
+import { Point } from "@angular/cdk/drag-drop";
 import { TypesNote } from "src/app/common/enums/types-note.enum";
 
 export interface INote {
@@ -12,4 +13,5 @@ export interface INote {
     }[];
     createdAt: number;
     updatedAt: number;
+    point?: Point
 }

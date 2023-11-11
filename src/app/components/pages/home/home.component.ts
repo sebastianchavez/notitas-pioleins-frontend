@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { IUser } from 'src/app/model/interfaces/user.interface';
 import { TypesNote } from 'src/app/common/enums/types-note.enum';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { CdkDragEnd, Point } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,12 @@ export class HomeComponent implements OnInit {
     createdAt: Date.now(),
     idUser: '',
     type: TypesNote.TASKLIST,
-    updatedAt: Date.now()
+    updatedAt: Date.now(),
+  }
+
+  point: Point = {
+    x: 0,
+    y: 0
   }
 
   constructor(
@@ -78,7 +84,7 @@ export class HomeComponent implements OnInit {
       createdAt: Date.now(),
       idUser: this.user?.idUser!  ,
       type: TypesNote.TASKLIST,
-      updatedAt: Date.now()
+      updatedAt: Date.now(),
     }
   }
 
@@ -101,5 +107,25 @@ export class HomeComponent implements OnInit {
       this.alertService.alert('Problemas al eliminar nota, por favor intente más tarde', '', 'error')
       this.logger.error(this.idLog, this.deleteNote.name, {info: 'Error', error})
     }
+  }
+
+  moveCard(ev: any){
+    console.log('MOVE:',ev);
+    
+    // this.point = {
+    //   x: ev.event.x,
+    //   y: ev.event.y
+    // }
+    // this.noteService.createOrUpdate(note)
+  }
+
+  endMoveCard(ev: CdkDragEnd, note: INote){
+    console.log('END:',ev);
+    
+    note.point = {
+      x: ev.distance.x,
+      y: ev.distance.y
+    }
+    // this.noteService.createOrUpdate(note)
   }
 }

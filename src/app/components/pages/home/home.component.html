@@ -3,7 +3,7 @@
 
     <div class="grid-notes">
         <div *ngFor="let note of notes">
-            <mat-card>
+            <mat-card  cdkDrag (cdkDragMoved)="moveCard($event)" (cdkDragEnded)="endMoveCard($event, note)" >
                 <mat-card-header class="header-card">
                     <mat-card-title>{{note.title}}</mat-card-title>
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="close" (click)="deleteNote(note)"></mat-icon>

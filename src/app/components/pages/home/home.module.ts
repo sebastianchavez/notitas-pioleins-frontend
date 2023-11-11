@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card'
 import { MatIconModule } from '@angular/material/icon';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     MatCardModule,
     MatIconModule,
+    DragDropModule,
   ]
 })
 export class HomeModule { }
